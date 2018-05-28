@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./styles/materialize.min.css">
+
+    <script src="./styles/materialize.min.js" async></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+    <script src="js/firebaseConfig.js" async></script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Fill in info</h3>
+
+        <!-- <form action="#" name="formName" method="POST" id="formInput" onsubmit="return sendForm()"> -->
+        <!-- <form action=http://stackoverflow.com" name="inputForm" method="POST" id="formInput"> -->
+        <div class="input-field col s6">
+            <input type="text" name="projectName" id="projectName" value="">
+            <label for="projectName">Project Name</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" name="sector" id="sector" value="">
+            <label for="sector">Sector</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" name="services" id="services" value="">
+            <label for="services">Services</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" name="projectDescription" id="projectDescription" value="">
+            <label for="projectDescription">Brief Project Description</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" name="cordinates" id="cordinates" value="">
+            <label for="cordinates">Cordinates</label>
+        </div>
+        <br>
+        <input class="waves-effect waves-light btn" type="submit" value="Submit" onclick="sendInput()">
+        <input class="waves-effect waves-light btn" type="submit" value="Get Data" onclick="getData()">
+        <!-- </form> -->
+    </div>
+</body>
+
+</html>

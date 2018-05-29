@@ -1,0 +1,15 @@
+sector:
+Waste management
+Industrial contamination risk management
+Mining industry
+Water management
+GIS
+
+
+services:
+Design
+Feasbility Study
+Project Management
+Conformity assessments and construction supervision
+Morphological analysis of solid waste
+Collection and transportation of waste

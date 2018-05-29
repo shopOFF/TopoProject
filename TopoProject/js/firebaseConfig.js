@@ -13,7 +13,9 @@ const db = initializeFirebase(config);
 function initializeFirebase(configData) {
     firebase.initializeApp(configData);
     const db = firebase.firestore();
-    const settings = { timestampsInSnapshots: true };
+    const settings = {
+        timestampsInSnapshots: true
+    };
     db.settings(settings);
 
     return db;
@@ -26,18 +28,27 @@ function sendInput() {
     const services = document.querySelector("#services").value;
     const projectDescription = document.querySelector("#projectDescription").value;
     const cordinates = document.querySelector("#cordinates").value;
-    
+
     addData(projectName, sector, services, projectDescription, cordinates)
 }
 
+//https://leafletjs.com/examples/geojson/sample-geojson.js refferences
+//http://geojson.org/
+
 function addData(projName, sector, services, projDescription, cordinates) {
     db.collection("pointsInfo").add({
-        projectName: `${projName}`,
-        sector: `${sector}`,
-        services: `${services}`,
-        projectDescription: `${projDescription}`,
-        cordinates: `${cordinates}`
-         })
+            geometry: {
+                type: "Point",
+                cordinates: [cordinates, cordinates] // longtitude, latitude
+            },
+            type: "Feature",
+            properties: {
+                projectName: `${projName}`,
+                sector: `${sector}`,
+                services: `${services}`,
+                projectDescription: `${projDescription}`,
+            }
+        })
         .then(function (docRef) {
             console.log(`doc Id: ${docRef.id} - Added!`, )
         })

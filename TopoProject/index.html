@@ -7,33 +7,53 @@
     <script src="./styles/materialize.min.js" async></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
     <script src="js/firebaseConfig.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h3>Fill in info</h3>
+        <h3>Fill in Point Info</h3>
 
         <!-- <form action="#" name="formName" method="POST" id="formInput" onsubmit="return sendForm()"> -->
         <!-- <form action=http://stackoverflow.com" name="inputForm" method="POST" id="formInput"> -->
+        <div class="input-field col s12" id="sector">
+            <select>
+                <option value="" disabled selected>Select sector</option>
+                <option value="1">Waste management</option>
+                <option value="2">Industrial contamination risk management</option>
+                <option value="3">Mining industry</option>
+                <option value="4">Water management</option>
+                <option value="5">GIS</option>
+            </select>
+        </div>
+        <div class="input-field col s12" id="services">
+            <select>
+                <option value="" disabled selected>Select services</option>
+                <option value="1">Design</option>
+                <option value="2">Feasbility Study</option>
+                <option value="3">Project Management</option>
+                <option value="4">Conformity assessments and construction supervision</option>
+                <option value="5">Morphological analysis of solid waste</option>
+                <option value="6">Collection and transportation of waste</option>>
+            </select>
+        </div>
         <div class="input-field col s6">
             <input type="text" name="projectName" id="projectName" value="">
             <label for="projectName">Project Name</label>
         </div>
         <div class="input-field col s6">
-            <input type="text" name="sector" id="sector" value="">
-            <label for="sector">Sector</label>
-        </div>
-        <div class="input-field col s6">
-            <input type="text" name="services" id="services" value="">
-            <label for="services">Services</label>
-        </div>
-        <div class="input-field col s6">
             <input type="text" name="projectDescription" id="projectDescription" value="">
             <label for="projectDescription">Brief Project Description</label>
         </div>
+        <br>
+        <h6>Cordinates</h6>
         <div class="input-field col s6">
-            <input type="text" name="cordinates" id="cordinates" value="">
-            <label for="cordinates">Cordinates</label>
+            <input type="number" name="latitude" id="latitude" value="">
+            <label for="latitude">Latitude</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="number" name="longitude" id="longitude" value="">
+            <label for="longitude">Longitude</label>
         </div>
         <br>
         <input class="waves-effect waves-light btn" type="submit" value="Submit" onclick="sendInput()">

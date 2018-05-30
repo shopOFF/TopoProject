@@ -23,32 +23,33 @@ function initializeFirebase(configData) {
 
 
 function sendInput() {
-    const projectName = document.querySelector("#projectName").value;
-    const sector = document.querySelector("#sector").value;
-    const services = document.querySelector("#services").value;
-    const projectDescription = document.querySelector("#projectDescription").value;
-    const cordinates = document.querySelector("#cordinates").value;
+    const projectName = $("#projectName").val();
+    const sector = $("#sector :selected").text();
+    const services = $("#services :selected").text();
+    const projectDescription = $("#projectDescription").val();
+    const latitude = +$("#latitude").val();
+    const longitude = +$("#longitude").val();
 
-    addData(projectName, sector, services, projectDescription, cordinates)
+    addData(projectName, sector, services, projectDescription, latitude, longitude)
 }
 
 //https://leafletjs.com/examples/geojson/sample-geojson.js refferences
 //http://geojson.org/
 
-function addData(projName, sector, services, projDescription, cordinates) {
+function addData(projName, sector, services, projDescription, lat, lon) {
     db.collection("pointsInfo").add({
-            geometry: {
-                type: "Point",
-                cordinates: [cordinates, cordinates] // longtitude, latitude
-            },
-            type: "Feature",
-            properties: {
-                projectName: `${projName}`,
-                sector: `${sector}`,
-                services: `${services}`,
-                projectDescription: `${projDescription}`,
-            }
-        })
+        type: "Feature",
+        geometry: {
+            type: "Point",
+            cordinates: [lat, lon] // longtitude, latitude
+        },
+        properties: {
+            projectName: `${projName}`,
+            sector: `${sector}`,
+            services: `${services}`,
+            projectDescription: `${projDescription}`,
+        }
+    })
         .then(function (docRef) {
             console.log(`doc Id: ${docRef.id} - Added!`, )
         })
@@ -67,3 +68,7 @@ function getData() {
         });
     });
 }
+
+$(document).ready(function () {
+    $('select').formSelect();
+});

@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $('select').formSelect();
+});
+
 const config = {
     apiKey: "AIzaSyAvCrNkkCthSVjLVlZriieX-hM5BcFrIRo",
     authDomain: "justtesting-b74c2.firebaseapp.com",
@@ -27,29 +31,29 @@ function sendInput() {
     const sector = $("#sector :selected").text();
     const services = $("#services :selected").text();
     const projectDescription = $("#projectDescription").val();
-    const latitude = +$("#latitude").val();
     const longitude = +$("#longitude").val();
+    const latitude = +$("#latitude").val();
 
-    addData(projectName, sector, services, projectDescription, latitude, longitude)
+    addData(projectName, sector, services, projectDescription, longitude, latitude)
 }
 
 //https://leafletjs.com/examples/geojson/sample-geojson.js refferences
 //http://geojson.org/
 
-function addData(projName, sector, services, projDescription, lat, lon) {
+function addData(projName, sector, services, projDescription, lon, lat) {
     db.collection("pointsInfo").add({
-        type: "Feature",
-        geometry: {
-            type: "Point",
-            cordinates: [lat, lon] // longtitude, latitude
-        },
-        properties: {
-            projectName: `${projName}`,
-            sector: `${sector}`,
-            services: `${services}`,
-            projectDescription: `${projDescription}`,
-        }
-    })
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                cordinates: [lon, lat] // longtitude, latitude
+            },
+            properties: {
+                projectName: `${projName}`,
+                sector: `${sector}`,
+                services: `${services}`,
+                projectDescription: `${projDescription}`,
+            }
+        })
         .then(function (docRef) {
             console.log(`doc Id: ${docRef.id} - Added!`, )
         })
@@ -64,11 +68,7 @@ function addData(projName, sector, services, projDescription, lat, lon) {
 function getData() {
     db.collection("pointsInfo").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            console.log(`Doc Id: ${doc.id} => Proj Descr: ${doc.data().projectDescription}`);
+            console.log(`Doc Id: ${doc.id} => Proj Descr: ${doc.data().properties.projectDescription}`);
         });
     });
 }
-
-$(document).ready(function () {
-    $('select').formSelect();
-});

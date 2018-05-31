@@ -42,20 +42,20 @@ function sendInput() {
 
 function addData(projName, sector, services, projDescription, lon, lat) {
     db.collection("pointsInfo").add({
-            type: "Feature",
-            geometry: {
-                type: "Point",
-                cordinates: [lon, lat] // longtitude, latitude
-            },
-            properties: {
-                projectName: `${projName}`,
-                sector: `${sector}`,
-                services: `${services}`,
-                projectDescription: `${projDescription}`,
-            }
-        })
+        type: "Feature",
+        geometry: {
+            type: "Point",
+            cordinates: [lon, lat] // longtitude, latitude
+        },
+        properties: {
+            projectName: `${projName}`,
+            sector: `${sector}`,
+            services: `${services}`,
+            projectDescription: `${projDescription}`
+        }
+    })
         .then(function (docRef) {
-            console.log(`doc Id: ${docRef.id} - Added!`, )
+            console.log(`Doc with Id: ${docRef.id} - Added!`)
         })
         .then(function (redirect) {
             // window.location.replace("http://195.96.242.219:6585/bteng_maps_demo/index_en.html"); // or assign if you want to go back to prev page
@@ -72,3 +72,35 @@ function getData() {
         });
     });
 }
+
+$("#updateBtn").on('click', function () {
+    $("#updateMenu").show();
+   
+});
+
+
+$("#searchBtn").on('click', function () {
+    const pName = $("#pName").val();
+
+    db.collection("pointsInfo").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if ((doc.data().properties.projectName).toLowerCase() === pName.toLowerCase()) {
+
+                    const docRef = db.doc(`pointsInfo/${doc.id}`);
+                    docRef.update({
+                        properties: {
+                            projectDescription: "testing againg to seee"
+                        }
+                    });
+                }
+                else {
+                    $(document).ready(function () {
+                        alert('Project with the name provided was not found');
+                    });
+                }
+                //console.log(`Doc Id: ${doc.id} => Proj Descr: ${doc.data().properties.projectDescription}`);
+            });
+        });
+});
+

@@ -6,7 +6,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./styles/materialize.min.js" async></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
     <script src="js/firebaseConfig.js" async></script>
 </head>
 
@@ -41,8 +43,8 @@
             <input type="text" name="projectName" id="projectName" value="">
             <label for="projectName">Project Name</label>
         </div>
-        <div class="input-field col s6">
-            <input type="text" name="projectDescription" id="projectDescription" value="">
+        <div class="input-field col s12">
+            <textarea name="projectDescription" id="projectDescription" class="materialize-textarea" value=""></textarea>
             <label for="projectDescription">Brief Project Description</label>
         </div>
         <br>
@@ -58,6 +60,13 @@
         <br>
         <input class="waves-effect waves-light btn" type="submit" value="Submit" onclick="sendInput()">
         <input class="waves-effect waves-light btn" type="submit" value="Get Data" onclick="getData()">
+        <input class="waves-effect waves-light btn" type="submit" value="Update Point Info" id="updateBtn">
+
+        <div class="input-field col s6" id="updateMenu" hidden>
+            <input type="text" name="pName" id="pName" value="">
+            <label for="pName">Project Name</label>
+            <input class="waves-effect waves-light btn" type="submit" value="Search for Project" id="searchBtn">
+        </div>
         <!-- </form> -->
     </div>
 </body>

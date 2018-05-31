@@ -3,8 +3,10 @@
 
 <head>
     <link rel="stylesheet" href="./styles/materialize.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="./styles/materialize.min.js" async></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
@@ -15,9 +17,7 @@
 <body>
     <div class="container">
         <h3>Fill in Point Info</h3>
-
-        <!-- <form action="#" name="formName" method="POST" id="formInput" onsubmit="return sendForm()"> -->
-        <!-- <form action=http://stackoverflow.com" name="inputForm" method="POST" id="formInput"> -->
+        <!-- <form action="#"> -->
         <div class="input-field col s12" id="sector">
             <select>
                 <option value="" disabled selected>Select sector</option>
@@ -58,14 +58,15 @@
             <label for="latitude">Latitude</label>
         </div>
         <br>
-        <input class="waves-effect waves-light btn" type="submit" value="Submit" onclick="sendInput()">
-        <input class="waves-effect waves-light btn" type="submit" value="Get Data" onclick="getData()">
-        <input class="waves-effect waves-light btn" type="submit" value="Update Point Info" id="updateBtn">
+        <input class="waves-effect waves-light btn" type="submit" value="Submit" id="submitBtn">
+        <input class="waves-effect waves-light btn" type="submit" value="Get Data" id="getDataBtn">
+        <input class="waves-effect waves-light btn" type="submit" value="Update Menu" id="updateMenu">
 
-        <div class="input-field col s6" id="updateMenu" hidden>
+        <div class="input-field col s6" id="updateInput" hidden>
             <input type="text" name="pName" id="pName" value="">
             <label for="pName">Project Name</label>
             <input class="waves-effect waves-light btn" type="submit" value="Search for Project" id="searchBtn">
+            <input class="btn disabled" type="submit" value="Update" id="updateBtn">
         </div>
         <!-- </form> -->
     </div>

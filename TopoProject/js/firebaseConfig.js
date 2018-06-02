@@ -45,9 +45,6 @@ $("#submitBtn").on("click", function () {
     }
 });
 
-//https://leafletjs.com/examples/geojson/sample-geojson.js refferences
-//http://geojson.org/
-
 function addData(projName, sector, services, projDescription, lon, lat) {
     db.collection("pointsInfo").add({
         type: "Feature",
@@ -79,7 +76,16 @@ $("#getDataBtn").on("click", function () {
     db.collection("pointsInfo").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(`Doc Id: ${doc.id} => Proj Descr: ${doc.data().properties.projectDescription}`);
+                const docId = doc.id;
+                const projName = doc.data().properties.projectName;
+                const projSector = doc.data().properties.sector;
+                const projServices = doc.data().properties.services;
+                const projDescr = doc.data().properties.projectDescription;
+                // cordinates
+                const projLongtitude = doc.data().geometry.cordinates[0];
+                const projLatitude = doc.data().geometry.cordinates[1];
+
+                console.log(`Doc Id: ${doc.id} => Project Name: ${projName} => Lon, Lat: ${projLongtitude}, ${projLatitude}`);
             });
         })
         .catch(function (error) {

@@ -18,44 +18,41 @@
     <div class="container">
         <h3>Fill in Point Info</h3>
         <!-- <form action="#"> -->
-        <div class="input-field col s12" id="sector">
-            <select>
+        <div class="input-field col s12">
+            <select id="sector">
                 <option value="" disabled selected>Select sector</option>
-                <option value="1">Waste management</option>
-                <option value="2">Industrial contamination risk management</option>
-                <option value="3">Mining industry</option>
-                <option value="4">Water management</option>
-                <option value="5">GIS</option>
+                <option value="Waste management">Waste management</option>
+                <option value="Industrial contamination risk management">Industrial contamination risk management</option>
+                <option value="Mining industry">Mining industry</option>
+                <option value="Water management">Water management</option>
+                <option value="GIS">GIS</option>
             </select>
-        </div>
-        <div class="input-field col s12" id="services">
-            <select>
-                <option value="" disabled selected>Select services</option>
-                <option value="1">Design</option>
-                <option value="2">Feasbility Study</option>
-                <option value="3">Project Management</option>
-                <option value="4">Conformity assessments and construction supervision</option>
-                <option value="5">Morphological analysis of solid waste</option>
-                <option value="6">Collection and transportation of waste</option>>
-            </select>
-        </div>
-        <div class="input-field col s6">
-            <input type="text" name="projectName" id="projectName" value="">
-            <label for="projectName">Project Name</label>
         </div>
         <div class="input-field col s12">
-            <textarea name="projectDescription" id="projectDescription" class="materialize-textarea" value=""></textarea>
-            <label for="projectDescription">Brief Project Description</label>
+            <select id="services">
+                <option value="" disabled selected>Select services</option>
+                <option value="Design">Design</option>
+                <option value="Feasbility Study">Feasbility Study</option>
+                <option value="Project Management">Project Management</option>
+                <option value="Conformity assessments and construction supervision">Conformity assessments and construction supervision</option>
+                <option value="Morphological analysis of solid waste">Morphological analysis of solid waste</option>
+                <option value="Collection and transportation of waste">Collection and transportation of waste</option>>
+            </select>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" placeholder="Project Name" name="projectName" id="projectName" value="">
+        </div>
+        <div class="input-field col s12">
+            <textarea name="projectDescription" placeholder="Brief Project Description" id="projectDescription" class="materialize-textarea"
+                value=""></textarea>
         </div>
         <br>
-        <h6>Cordinates</h6>
+        <h6>Cordinates:</h6>
         <div class="input-field col s6">
-            <input type="number" name="longitude" id="longitude" value="">
-            <label for="longitude">Longitude</label>
+            <input type="number" placeholder="Longitude" name="longitude" id="longitude" value="">
         </div>
         <div class="input-field col s6">
-            <input type="number" name="latitude" id="latitude" value="">
-            <label for="latitude">Latitude</label>
+            <input type="number" placeholder="Latitude" name="latitude" id="latitude" value="">
         </div>
         <br>
         <input class="waves-effect waves-light btn" type="submit" value="Submit" id="submitBtn">
@@ -63,10 +60,9 @@
         <input class="waves-effect waves-light btn" type="submit" value="Update Menu" id="updateMenu">
 
         <div class="input-field col s6" id="updateInput" hidden>
-            <input type="text" name="pName" id="pName" value="">
-            <label for="pName">Project Name</label>
+            <input type="text" placeholder="Enter Project Name" name="pName" id="pName" value="">
             <input class="waves-effect waves-light btn" type="submit" value="Search for Project" id="searchBtn">
-            <input class="btn disabled" type="submit" value="Update" id="updateBtn">
+            <input class="btn disabled" type="submit" value="Update" id="updateBtn" style="background-color: yellowgreen">
         </div>
         <!-- </form> -->
     </div>

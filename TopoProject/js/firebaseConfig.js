@@ -108,12 +108,16 @@ $("#searchBtn").on("click", function () {
                 if ((doc.data().properties.projectName).toLowerCase() === pName.toLowerCase()) {
                     toastr.info("Project Document was found Successfully!")
 
-                    // $("#sector").text(doc.data().properties.services);
-                    // $("#services").text(doc.data().properties.services);
+                    $(document).ready(function () {
+                        $("#sector").val(doc.data().properties.sector);
+                        $("#services").val(doc.data().properties.services);
+                        $("select").formSelect();
+                    });
                     $("#projectName").val(doc.data().properties.projectName);
-                    $("#projectDescription").val(doc.data().properties.projectDescription);
                     $("#longitude").val(doc.data().geometry.cordinates[0]);
                     $("#latitude").val(doc.data().geometry.cordinates[1]);
+                    $("#projectDescription").val(doc.data().properties.projectDescription);
+                    M.textareaAutoResize($("#projectDescription"));
 
                     $("#updateBtn")
                         .removeClass("btn disabled")

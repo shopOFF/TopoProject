@@ -29,21 +29,23 @@ function initializeFirebase(configData) {
     return db;
 }
 
-$("#submitBtn").on("click", function () {
-    const projectName = $("#projectName").val().trim();
-    const sector = $("#sector :selected").text();
-    const services = $("#services :selected").text();
-    const projectDescription = $("#projectDescription").val();
-    const longitude = +$("#longitude").val();
-    const latitude = +$("#latitude").val();
+if (document.location.search.substr(1).split('&') == "") {
+    $("#submitBtn").on("click", function () {
+        const projectName = $("#projectName").val().trim();
+        const sector = $("#sector :selected").text();
+        const services = $("#services :selected").text();
+        const projectDescription = $("#projectDescription").val();
+        const longitude = +$("#longitude").val();
+        const latitude = +$("#latitude").val();
 
-    if (!projectName.trim()) {
-        toastr.warning("Project Name is Required!");
-    }
-    else {
-        addData(projectName, sector, services, projectDescription, longitude, latitude)
-    }
-});
+        if (!projectName.trim()) {
+            toastr.warning("Project Name is Required!");
+        }
+        else {
+            addData(projectName, sector, services, projectDescription, longitude, latitude)
+        }
+    });
+}
 
 function addData(projName, sector, services, projDescription, lon, lat) {
     db.collection("pointsInfo").add({
@@ -73,6 +75,8 @@ function addData(projName, sector, services, projDescription, lon, lat) {
 }
 
 $("#getDataBtn").on("click", function () {
+    $("#submitBtn").removeClass("btn disabled");
+
     db.collection("pointsInfo").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -84,7 +88,6 @@ $("#getDataBtn").on("click", function () {
                 // cordinates
                 const projLongtitude = doc.data().geometry.cordinates[0];
                 const projLatitude = doc.data().geometry.cordinates[1];
-
                 console.log(`Doc Id: ${doc.id} => Project Name: ${projName} => Lon, Lat: ${projLongtitude}, ${projLatitude}`);
             });
         })
@@ -98,15 +101,20 @@ $("#updateMenu").on("click", function () {
     $("#updateInput").toggle();
 });
 
+if (document.location.search.substr(1).split('&') != "") {
+    const queries = {};
+    $.each(document.location.search.substr(1).split('&'), function (c, q) {
+        const i = q.split('=');
+        queries[i[0].toString()] = i[1].toString();
+    });
 
-$("#searchBtn").on("click", function () {
-    const pName = $("#pName").val();
+    $("#submitBtn").addClass("btn disabled");
 
     db.collection("pointsInfo").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if ((doc.data().properties.projectName).toLowerCase() === pName.toLowerCase()) {
-                    toastr.info("Project Document was found Successfully!")
+                if (doc.id === queries.doc) {
+                    toastr.info("Project's Data was found Successfully, and can be Updated!")
 
                     $(document).ready(function () {
                         $("#sector").val(doc.data().properties.sector);
@@ -142,11 +150,6 @@ $("#searchBtn").on("click", function () {
                                 });
                         });
                 }
-                else {
-                    $("#updateBtn").removeClass("waves-effect waves-light btn").addClass("btn disabled");
-                    toastr.info(`Project with the name: "${pName.toUpperCase()}" was not found`);
-                    console.log(`Project with the name: "${pName.toUpperCase()}" was not found`);
-                }
             });
         })
-});
+}
